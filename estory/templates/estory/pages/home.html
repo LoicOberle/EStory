@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - EStory</title>
+    {% include "estory/components/vue.html" %}
+    {% include "estory/components/bootstrap.html" %}
+    <link rel="stylesheet" href="{% static 'estory/css/home.css' %}">
+    <!-- Development -->
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+
+    
+
+</head>
+<body>
+  
+    <div id="app">
+        <museumname name="{{ name }}" ></museumname>
+        <usermenu :isuserconnected = '{{isUserConnected|lower}}'></usermenu>
+
+    </div>
+
+
+
+    <script type="module" src='{% static "estory/js/home.js" %}'></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+.userMenuList{
+    list-style: none;
+}
+
+.userMenu{
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+ 
+}
+
+.userMenuPopup{
+    position: absolute;
+    top: -10em;
+    left: -10em;
+    background-color: var(--bs-secondary-color);
+    width: 10em;
+    height: 10em;
+    transition: visibility 0s, opacity 0.2s linear;
+    border-radius: 1em;
+}
+
+.museumName{
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: larger;
+
+}
