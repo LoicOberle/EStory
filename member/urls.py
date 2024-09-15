@@ -1,0 +1,8 @@
+from django.contrib import admin
+from django.urls import path,include
+from . import views
+
+urlpatterns = [
+    path("",views.index_view,name="Index"),
+    path('inventory/', include('inventory.urls')),
+]
