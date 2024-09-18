@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include "estory/components/vue.html" %}
+    {% include "estory/components/bootstrap.html" %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/jquery.dirty@0.8.4/dist/jquery.dirty.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.8.1/tagify.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.8.1/tagify.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app" data-objectid="{{object.id}}">
+   
+        <editswitch v-if="loaded"></editswitch>
+        <form action="/member/inventory/object/{{object.id}}/detail/save" method="POST" v-if="loaded" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <inventoryidfield objectid="{{object.id}}" ></inventoryidfield>
+            <namefield objectid="{{object.id}}"></namefield>
+            <originfield objectid="{{object.id}}"></originfield>
+            <datingfield objectid="{{object.id}}"></datingfield>
+            <provenancefield objectid="{{object.id}}"></provenancefield>
+            <reservelocationfield objectid="{{object.id}}"></reservelocationfield>
+            <authorfield objectid="{{object.id}}"></authorfield>
+            <categoryfield objectid="{{object.id}}"></categoryfield>
+            <materialfield objectid="{{object.id}}"></materialfield>
+            <descriptionfield objectid="{{object.id}}"></descriptionfield>
+            <bibliographyfield objectid="{{object.id}}"></bibliographyfield>
+            <roomfield objectid="{{object.id}}"></roomfield>
+            <photoField objectid="{{object.id}}"></photofield>
+            <confirmchangesbutton objectid="{{object.id}}"></confirmchangesbutton>
+        </form>
+    </div>
+
+
+
+    <script type="module" src='{% static "inventory/js/detail.js" %}'></script>
+</body>
+
+</html>

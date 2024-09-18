@@ -1,11 +1,23 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% include "estory/components/vue.html" %}
+    {% include "estory/components/bootstrap.html" %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     Inventory
+
+    <div id="app">
+        <inventoryobjectlist></inventoryobjectlist>
+        <newobjectbutton></newobjectbutton>
+
+    </div>
+
+    <script type="module" src='{% static "inventory/js/index.js" %}'></script>
 </body>
 </html>

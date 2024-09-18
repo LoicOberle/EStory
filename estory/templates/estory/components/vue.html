@@ -1,10 +1,30 @@
 {% load static  %}
+<script src="https://cdn.jsdelivr.net/npm/mitt/dist/mitt.umd.js"></script>
+
 <script type="importmap">
     {
       "imports": {
         "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
+        "eventBus": "{% static 'estory/vue-components/eventBus.js' %}",
         "museumName": "{% static 'estory/vue-components/museumName.js' %}",
-        "userMenu": "{% static 'estory/vue-components/userMenu.js' %}"
+        "userMenu": "{% static 'estory/vue-components/userMenu.js' %}",
+        "inventoryobjectlist": "{% static 'inventory/vue-components/inventoryObjectList.js' %}",
+        "newobjectbutton": "{% static 'inventory/vue-components/newObjectButton.js' %}",
+        "inventoryidfield": "{% static 'inventory/vue-components/details/inventoryIdField.js' %}",
+        "namefield": "{% static 'inventory/vue-components/details/nameField.js' %}",
+        "originfield": "{% static 'inventory/vue-components/details/originField.js' %}",
+        "datingfield": "{% static 'inventory/vue-components/details/datingField.js' %}",
+        "provenancefield": "{% static 'inventory/vue-components/details/provenanceField.js' %}",
+        "reservelocationfield": "{% static 'inventory/vue-components/details/reserveLocationField.js' %}",
+        "authorfield": "{% static 'inventory/vue-components/details/authorField.js' %}",
+        "categoryfield": "{% static 'inventory/vue-components/details/categoryField.js' %}",
+        "materialfield": "{% static 'inventory/vue-components/details/materialField.js' %}",
+        "descriptionfield": "{% static 'inventory/vue-components/details/descriptionField.js' %}",
+        "bibliographyfield": "{% static 'inventory/vue-components/details/bibliographyField.js' %}",
+        "roomfield": "{% static 'inventory/vue-components/details/roomField.js' %}",
+        "photofield": "{% static 'inventory/vue-components/details/photoField.js' %}",
+        "editswitch": "{% static 'inventory/vue-components/details/editSwitch.js' %}",
+        "confirmChangesButton": "{% static 'inventory/vue-components/details/confirmChangesButton.js' %}"
 
       }
     }

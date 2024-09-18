@@ -16,7 +16,7 @@
     background-color: var(--bs-secondary-color);
     width: 10em;
     height: 10em;
-    transition: visibility 0s, opacity 0.2s linear;
+    transition: visibility 0.3s, opacity 0.2s linear;
     border-radius: 1em;
 }
 

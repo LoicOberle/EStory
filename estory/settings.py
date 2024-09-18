@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'estory',
     'member',
-    'inventory'
+    'inventory',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -132,7 +133,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/auth/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = "/"
-LOGIN_REQUIRED_PATH_PREFIX = '/member/'
+LOGIN_REQUIRED_PATH_PREFIXES = [
+    '/member/', 
+    '/api/',
+    
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

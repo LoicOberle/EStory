@@ -30,6 +30,7 @@ urlpatterns = [
     path("",views.home_view,name="Home"),
     path('auth/', include('django.contrib.auth.urls')),
     path('member/', include('member.urls')),
+    path('api/', include('api.urls')),
 ]
 
 
