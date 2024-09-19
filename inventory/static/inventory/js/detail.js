@@ -15,7 +15,10 @@ import bibliographyField from "bibliographyfield"
 import roomField from "roomfield"
 import photoField from "photofield"
 import navbar from "navbar"
-
+import operationList from 'operationlist'
+import newoperation from "newoperation"
+import loanList from 'loanlist'
+import newloan from "newloan"
 const app = createApp({
     delimiters: ["[[", "]]"],
     data() {
@@ -51,7 +54,10 @@ const app = createApp({
     }
   })
 
+  //General components
   app.component('navbar',navbar)
+
+  //Infos components
   app.component('inventoryidfield',inventoryIdField)
   app.component('namefield',nameField)
   app.component('originfield',originField)
@@ -67,6 +73,15 @@ const app = createApp({
   app.component('photofield',photoField)
   app.component('editswitch',editSwitch)
   app.component('confirmchangesbutton',confirmChangesButton)
+
+  //Operations components
+  app.component('operationlist',operationList)
+  app.component('newoperation',newoperation)
+
+  //Loan components
+  app.component('loanlist',loanList)
+  app.component('newloan',newloan)
+
   app.mount("#app")
 
   $(document).ready(()=>{

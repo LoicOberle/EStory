@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.template.response import TemplateResponse
-from django.http import HttpResponseRedirect,JsonResponse
+from django.http import HttpResponseRedirect,JsonResponse,HttpResponse
 from . import models
 from . import utilities
 from datetime import datetime
@@ -13,7 +13,7 @@ def detail_view(request,objectId):
     }
     return TemplateResponse(request, 'inventory/pages/objectDetail.html', context=context)
 
-def detail_save(request,objectId):
+def infos_save(request,objectId):
     #Get object to compare fields
     objectToModify=models.InventoryObject.objects.prefetch_related('categories').prefetch_related('materials').get(id=objectId)
 
@@ -281,3 +281,71 @@ def detail_save(request,objectId):
 
     return HttpResponseRedirect(f"/member/inventory/object/{objectId}/detail/")
 
+def operations_save(request,objectId):
+    form=request.POST
+    operationDatetime=form["datetime"]
+    operationDescription=form["description"]
+    objectToModify=models.InventoryObject.objects.get(id=objectId)
+
+    print(operationDatetime)
+    formattedOperationDatetime=datetime.strptime(operationDatetime, "%Y-%m-%d %H:%M") #'2024-09-18 12:00'
+    
+    models.OperationHistory.objects.create(inventoryObject=objectToModify,date=formattedOperationDatetime,description=operationDescription,author=request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+def loans_save(request,objectId):
+    form=request.POST
+    print(form)
+    loanStartDate=form["startDate"]
+    loanEndDate=form["endDate"]
+    if("ongoing" in form):
+        loanOngoing=True
+    else:
+        loanOngoing=False
+
+    loanDescription=form["description"]
+    objectToModify=models.InventoryObject.objects.get(id=objectId)
+
+    if(loanStartDate != ""):
+        formattedLoanStartDate=datetime.strptime(loanStartDate, "%Y-%m-%d") #'2024-09-18 12:00'
+    if(loanEndDate != ""):   
+        formattedLoanEndDate=datetime.strptime(loanEndDate, "%Y-%m-%d") #'2024-09-18 12:00'
+    
+  
+    if(loanOngoing):
+         models.LoanHistory.objects.create(inventoryObject=objectToModify,startDate=formattedLoanStartDate,description=loanDescription,ongoing=True)
+   
+    else:
+         models.LoanHistory.objects.create(inventoryObject=objectToModify,startDate=formattedLoanStartDate,endDate=formattedLoanEndDate,description=loanDescription,ongoing=False)
+    
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+def loans_edit(request,objectId):
+    form=request.POST
+    print(form)
+    loanStartDate=form["startDate"]
+    loanEndDate=form["endDate"]
+    if("ongoing" in form):
+        loanOngoing=True
+    else:
+        loanOngoing=False
+    loanDescription=form["description"]
+    objectToModify=models.InventoryObject.objects.get(id=objectId)
+    loanToModify=models.LoanHistory.objects.get(id=form["loanId"])
+
+    if(loanStartDate != ""):
+        formattedLoanStartDate=datetime.strptime(loanStartDate, "%Y-%m-%d") #'2024-09-18 12:00'
+    if(loanEndDate != ""):
+        formattedLoanEndDate=datetime.strptime(loanEndDate, "%Y-%m-%d") #'2024-09-18 12:00'
+    
+    print(formattedLoanStartDate,formattedLoanEndDate,loanOngoing,loanDescription)
+
+    loanToModify.startDate=formattedLoanStartDate
+    loanToModify.endDate=formattedLoanEndDate
+    loanToModify.ongoing=loanOngoing
+    loanToModify.description=loanDescription     
+    
+    print(loanToModify)
+    loanToModify.save()
+ 
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

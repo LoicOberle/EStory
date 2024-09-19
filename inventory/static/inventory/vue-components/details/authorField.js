@@ -14,9 +14,6 @@ export default {
     },
     methods:{
         async fetchData(){
-            let objectReq=await fetch("/api/inventory/object/"+this.objectid,{
-                method:"GET"
-            })
             let objectRes=this.$root.objectData
             let author=objectRes.author
             this.value=author

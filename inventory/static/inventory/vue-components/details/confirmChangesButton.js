@@ -25,7 +25,7 @@ export default {
         });
        
         
-        await fetch(`/member/inventory/object/${this.objectid}/detail/save`, {
+        await fetch(`/member/inventory/object/${this.objectid}/infos/save`, {
             method: 'POST',
             body: formData,
         })

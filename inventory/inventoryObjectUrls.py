@@ -5,6 +5,9 @@ from . import inventoryObjectViews
 
 urlpatterns = [
     path("<objectId>/detail/",inventoryObjectViews.detail_view),
-    path("<objectId>/detail/save",inventoryObjectViews.detail_save)
+    path("<objectId>/infos/save",inventoryObjectViews.infos_save),
+    path("<objectId>/operations/save",inventoryObjectViews.operations_save),
+    path("<objectId>/loans/save",inventoryObjectViews.loans_save),
+    path("<objectId>/loans/edit",inventoryObjectViews.loans_edit),
    
 ]

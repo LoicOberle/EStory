@@ -72,10 +72,17 @@ class ChangeHistory(models.Model):
     
 
 
-#Define the lending history of an object
-class LendingHistory(models.Model):
+#Define the loan history of an object
+class LoanHistory(models.Model):
     inventoryObject=models.ForeignKey(InventoryObject,on_delete=models.CASCADE) 
-    startDate=models.DateField()
-    endDate=models.DateField()
-    ongoing=models.BooleanField()
+    startDate=models.DateField(blank=True,null=True)
+    endDate=models.DateField(blank=True,null=True)
+    ongoing=models.BooleanField(blank=True,null=True)
+    description=models.TextField(blank=True,null=True)
+
+#Define the operation history of an object
+class OperationHistory(models.Model):
+    inventoryObject=models.ForeignKey(InventoryObject,on_delete=models.CASCADE) 
+    date=models.DateTimeField(blank=True,null=True)
     description=models.TextField()
+    author=models.ForeignKey(User, on_delete=models.CASCADE)
