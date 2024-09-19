@@ -75,7 +75,7 @@ export default {
    
     },
     template:`
-    <label class="form-labels">Materials</label>
+    <label class="form-label">Materials</label>
     <input id="materials" name="materials" placeholder="Add materials..."/>
   
     `

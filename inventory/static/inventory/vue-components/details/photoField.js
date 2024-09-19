@@ -175,20 +175,45 @@ export default {
 
     },
     template:`
-    <label class="form-labels">Photos</label>
+    <label class="form-label">Photos</label>
     <input @change="photoInputChange" type="file" id="photoInput" accept="image/*" multiple :disabled="!editingMode">
    
-    <div id="photoList">
+    <div id="photoList" class="overflow-y-scroll">
         
-       <div v-for="(photo , index) in photos">
-       <img :src="photo.base64" style="width:100px"></img>
-       <input class="photo-thumbnail" :value="index" type="radio" name="thumbnail" :checked="index==thumbnail" :disabled="!editingMode"></input>
-       <input class="photo-legend" type="text" :name="'photo-legend-'+index" :value="legends[index]" :disabled="!editingMode"/>
-       <textarea class="photo-description" :name="'photo-description-'+index" :value="descriptions[index]"></textarea>
-       <button @click="deletePhoto(index)">Delete</button>
-       </div>
-       {{updatePhotoListButton()}}
-     
+        <ul class="list-group">
+            <li v-for="(photo , index) in photos"  class="list-group-item">
+                <div class="row">
+                    <div class="col-md-2">
+                       <img :src="photo.base64" style="width:100px"></img>
+                    </div>
+                      <div class="col-md-2 col-form-label col-form-label">
+                        <label class="form-check-label" :for="'photo-thumbnail-'+index">Thumbnail</label>
+                        <label class="form-label" :for="'photo-legend-'+index">Legend</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input :id="'photo-thumbnail-'+index" class="photo-thumbnail form-check-input" :value="index" type="radio" name="thumbnail" :checked="index==thumbnail" :disabled="!editingMode"></input>   
+                        <input class="photo-legend form-control" type="text" :name="'photo-legend-'+index" :id="'photo-legend-'+index" :value="legends[index]" :disabled="!editingMode"/>
+            
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-12">
+                    <textarea class="photo-description" :name="'photo-description-'+index" :value="descriptions[index]"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-danger" @click="deletePhoto(index)">Delete</button>
+                </div>
+                
+            </div>
+            
+           
+            </li>
+            {{updatePhotoListButton()}}
+        
+        </ul>
+      
     </div>
       
   

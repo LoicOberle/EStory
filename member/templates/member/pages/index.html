@@ -1,11 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard - Estory</title>
+    {% include "estory/components/vue.html" %}
+    {% include "estory/components/bootstrap.html" %}
 </head>
 <body>
+   <div id="app">
+    <navbar title="Dashboard"></navbar>
     Member index page
+
+   </div>
+   <script type="module" src="{% static "/member/js/index.js" %}"></script>
 </body>
 </html>

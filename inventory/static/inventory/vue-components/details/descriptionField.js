@@ -95,7 +95,7 @@ export default {
 
     },
     template:`
-    <label class="form-labels">Description</label>
-    <textarea name="description" id="description" type="text" class="form-controls" ></textarea>
+    <label class="form-label">Description</label>
+    <textarea name="description" id="description" type="text" class="form-control" ></textarea>
     `
 }

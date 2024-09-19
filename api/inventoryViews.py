@@ -7,7 +7,12 @@ from inventory import serializers
 
 def all_objects_view(request):
     objects=models.InventoryObject.objects.all().values()
-    return JsonResponse({"data": list(objects)},safe=False)
+    data=list(objects)
+    ownership=[]
+    for object in data:
+        canDelete=(object["createdBy_id"]==request.user.id or request.user.is_superuser)
+        ownership.append(canDelete)
+    return JsonResponse({"data": data,"ownership":ownership},safe=False)
 
 def new_object_view(request):
     body_unicode = request.body.decode('utf-8')
@@ -24,7 +29,13 @@ def object_view(request,objectId):
     serializer=serializers.InventoryObjectSerializer(object)
   
                                                                                                      
-    return JsonResponse(serializer.data,safe=False)         
+    return JsonResponse(serializer.data,safe=False)    
+
+def object_delete(request,objectId):
+    object=models.InventoryObject.objects.get(id=objectId)
+    object.delete()
+                                                                                              
+    return JsonResponse({},safe=False)        
 
     
 def all_categories_view(request):

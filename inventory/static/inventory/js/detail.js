@@ -14,6 +14,7 @@ import descriptionField from "descriptionfield"
 import bibliographyField from "bibliographyfield"
 import roomField from "roomfield"
 import photoField from "photofield"
+import navbar from "navbar"
 
 const app = createApp({
     delimiters: ["[[", "]]"],
@@ -42,22 +43,15 @@ const app = createApp({
        await this.fetchData()
     },
     async mounted(){
-        let form=$('form')
-        form.dirty({
-            preventLeaving: true,
-            leavingMessage: "There are unsaved changes, do you want to continue ?"
-        });
+        
 
-        $(window).on('beforeunload', function() {
-            if (form.dirty('isDirty')) {
-                return 'You have unsaved changes!';
-            }
-        });
+ 
 
      
     }
   })
 
+  app.component('navbar',navbar)
   app.component('inventoryidfield',inventoryIdField)
   app.component('namefield',nameField)
   app.component('originfield',originField)
@@ -74,3 +68,14 @@ const app = createApp({
   app.component('editswitch',editSwitch)
   app.component('confirmchangesbutton',confirmChangesButton)
   app.mount("#app")
+
+  $(document).ready(()=>{
+    console.log("load");
+    
+    let form=$('form')
+    form.dirty({
+        preventLeaving: true,
+        leavingMessage: "There are unsaved changes, do you want to continue ?"
+    });
+  
+  })

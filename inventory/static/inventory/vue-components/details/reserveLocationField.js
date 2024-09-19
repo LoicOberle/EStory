@@ -33,7 +33,7 @@ export default {
 
     },
     template:`
-    <label class="form-labels">Reserve location</label>
-    <input name="reservelocation" type="text" class="form-controls" :value="value" :disabled="!editingMode" ></input>
+    <label class="form-label">Reserve location</label>
+    <input name="reservelocation" type="text" class="form-control" :value="value" :disabled="!editingMode" ></input>
     `
 }

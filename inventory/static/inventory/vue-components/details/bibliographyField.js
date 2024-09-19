@@ -94,7 +94,7 @@ export default {
 
     },
     template:`
-    <label class="form-labels">Bibliography</label>
-    <textarea name="bibliography" id="bibliography" type="text" class="form-controls" ></textarea>
+    <label class="form-label">Bibliography</label>
+    <textarea name="bibliography" id="bibliography" type="text" class="form-control" ></textarea>
     `
 }

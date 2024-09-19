@@ -33,7 +33,7 @@ export default {
 
     },
     template:`
-    <label class="form-labels">Origin</label>
-    <input name="origin" type="text" class="form-controls" :value="value" :disabled="!editingMode" ></input>
+    <label class="form-label">Origin</label>
+    <input name="origin" type="text" class="form-control" :value="value" :disabled="!editingMode" ></input>
     `
 }

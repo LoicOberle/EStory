@@ -14,7 +14,7 @@ export default {
             
            
             
-            if(!this.editingMode && $("form").dirty("isDirty")){
+            if( $("form").dirty("isDirty")){
                 Swal.fire({
                     title: "Are you sure?",
                     text: `There are unsaved changes, leaving the editing mode will reset values of the fields to their saved content.

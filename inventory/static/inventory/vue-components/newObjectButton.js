@@ -65,6 +65,6 @@ export default {
         }
     },
     template:`
-    <button @click="openNewObjectDialog" >New Object</button>
+    <button class="btn btn-primary" @click="openNewObjectDialog" >New Object</button>
     `
 }

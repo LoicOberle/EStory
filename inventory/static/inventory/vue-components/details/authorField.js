@@ -36,7 +36,7 @@ export default {
 
     },
     template:`
-    <label class="form-labels">Author</label>
-    <input name="author" type="text" class="form-controls" :value="value" :disabled="!editingMode" ></input>
+    <label class="form-label">Author</label>
+    <input name="author" type="text" class="form-control" :value="value" :disabled="!editingMode" ></input>
     `
 }

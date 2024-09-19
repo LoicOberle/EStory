@@ -61,8 +61,8 @@ export default {
 
     },
     template:`
-    <label class="form-labels">Room</label>
-    <select id="room" name="room" class="form-controls" :value="value" :disabled="!editingMode" >
+    <label class="form-label">Room</label>
+    <select id="room" name="room" class="form-control" :value="value" :disabled="!editingMode" >
     <option v-for="room in rooms"  :value="room.id">{{room.name}}</option>
     </select>
     `
