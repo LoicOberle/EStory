@@ -1,8 +1,15 @@
 import os
 from django.conf import settings
-from inventory.models import ObjectPhoto
-
+from . import models
 def purgeImages():
+    #We loop the images without an object to delete them
+
+    related_ids = models.InventoryObject.objects.values('photos')
+
+    unrelated_ids = models.ObjectPhoto.objects.exclude(id__in=related_ids)
+    for model in unrelated_ids:
+        model.delete()
+
     # Step 1: Get all image files from the media directory
     media_directory = settings.MEDIA_ROOT
     all_files_in_media = set(
@@ -14,7 +21,7 @@ def purgeImages():
     # Step 2: Get all image files currently associated with ImageField in MyModel
     used_images = set(
         os.path.join(settings.MEDIA_ROOT, instance.image.name)
-        for instance in ObjectPhoto.objects.all()
+        for instance in models.ObjectPhoto.objects.all()
         if instance.image  # if image field is not empty
     )
 
@@ -23,4 +30,18 @@ def purgeImages():
 
     for image_path in unused_images:
         os.remove(image_path)
-        print(f"Deleted: {image_path}")
+
+def purgeCategories():
+    related_ids = models.InventoryObject.objects.values('categories')
+
+    unrelated_ids = models.ObjectCategory.objects.exclude(id__in=related_ids)
+
+    for model in unrelated_ids:
+        model.delete()
+
+def purgeMaterials():
+    related_ids = models.InventoryObject.objects.values('materials')
+
+    unrelated_ids = models.ObjectMaterial.objects.exclude(id__in=related_ids)
+    for model in unrelated_ids:
+        model.delete()

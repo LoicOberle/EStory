@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect,JsonResponse
 from . import models
+from . import utilities
 from datetime import datetime
 import json
 import io
@@ -148,6 +149,7 @@ def detail_save(request,objectId):
 
             #Adding change to history table
             models.ChangeHistory.objects.create(inventoryObject=objectToModify,modifiedBy=request.user,modifiedAt=datetime.now(),fieldName="categories",oldValue=json.dumps(oldvalue),newValue=json.dumps(categories))
+        utilities.purgeCategories()
 
     if("materials" in form):
         if(form["materials"]==""):
@@ -194,6 +196,7 @@ def detail_save(request,objectId):
 
             #Adding change to history table
             models.ChangeHistory.objects.create(inventoryObject=objectToModify,modifiedBy=request.user,modifiedAt=datetime.now(),fieldName="materials",oldValue=json.dumps(oldvalue),newValue=json.dumps(materials))
+        utilities.purgeMaterials()
 
     if("description" in form):
         description=form["description"]
@@ -231,7 +234,7 @@ def detail_save(request,objectId):
 
             oldvalue=objectToModify.room
             #Changing fields's value
-            print(room)
+           
             if(room is not None):
                 room=models.Room.objects.get(id=room)
             objectToModify.room=room
@@ -265,16 +268,12 @@ def detail_save(request,objectId):
                 
                 objectToModify.photos.add(newPhoto)
 
-              #We loop the images without an object to delete them
-
-            related_ids = models.InventoryObject.objects.values('photos')
-
-            unrelated_ids = models.ObjectPhoto.objects.exclude(id__in=related_ids).delete()
+           
               
 
-        #Clean unused images
-        from .utilities import purgeImages
-        purgeImages()
+             #Clean unused images
+           
+            utilities.purgeImages()
    
     objectToModify.save()
  
