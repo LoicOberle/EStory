@@ -52,7 +52,7 @@ export default {
 
 <!-- Modal -->
 <div class="modal fade" id="newOperationModal" tabindex="-1" aria-labelledby="newOperationModalLabel" aria-hidden="true">
-  <form :action="'/member/inventory/object/'+objectid+'/loans/save'" method="POST">
+  <form :action="'/member/inventory/object/'+objectid+'/operations/save'" method="POST">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

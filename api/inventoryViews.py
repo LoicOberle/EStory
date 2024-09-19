@@ -58,14 +58,24 @@ def all_rooms_view(request):
     })
     return JsonResponse({"data": roomsList},safe=False)
 
-def all_operations_view(request):
-    operations=models.OperationHistory.objects.order_by('date').all()
+def all_operations_view(request,objectId):
+    objectToSearch=models.InventoryObject.objects.get(id=objectId)
+    operations=models.OperationHistory.objects.order_by('date').filter(inventoryObject=objectToSearch).all()
     serializer=serializers.OperationHistorySerializer(operations,many=True)
 
     return JsonResponse(serializer.data,safe=False)
 
-def all_loans_view(request):
-    loans=models.LoanHistory.objects.order_by('startDate').all()
+def all_loans_view(request,objectId):
+    objectToSearch=models.InventoryObject.objects.get(id=objectId)
+    loans=models.LoanHistory.objects.order_by('startDate').filter(inventoryObject=objectToSearch).all()
     serializer=serializers.LoanHistorySerializer(loans,many=True)
+
+    return JsonResponse(serializer.data,safe=False)
+
+
+def all_changes_view(request,objectId,field):
+    objectToSearch=models.InventoryObject.objects.get(id=objectId)
+    changes=models.ChangeHistory.objects.order_by('modifiedAt').filter(inventoryObject=objectToSearch,fieldName=field).all()
+    serializer=serializers.ChangeHistorySerializer(changes,many=True)
 
     return JsonResponse(serializer.data,safe=False)

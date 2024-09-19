@@ -4,6 +4,7 @@ export default {
     components:{
         "loanedit":loanEdit
     },
+    props:["objectid"],
     data(){
         return{
             loans:[]
@@ -11,7 +12,7 @@ export default {
     },
     methods:{
         async fetchData(){
-            let loanReq=await fetch("/api/inventory/loans",{
+            let loanReq=await fetch(`/api/inventory/object/${this.objectid}/loans`,{
                 method:"GET"
             })
             let loanRes=await loanReq.json()

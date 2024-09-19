@@ -45,8 +45,9 @@ class LoanHistorySerializer(serializers.ModelSerializer):
         model=models.LoanHistory
         fields=["id","inventoryObject","startDate","description","endDate","ongoing"]
 
-class ChangeHistorySerilizer(serializers.ModelSerializer):
+class ChangeHistorySerializer(serializers.ModelSerializer):
     inventoryObject=InventoryObjectSerializer(many=False)
+    modifiedBy=UserSerializer(many=False)
     class Meta:
         model=models.ChangeHistory
         fields=["id","inventoryObject","modifiedBy","modifiedAt","fieldName","oldValue","newValue"]

@@ -1,6 +1,10 @@
 
+import inventoryIdChanges from "inventoryidchanges"
 export default {
     props:["objectid"],
+    components:{
+        "inventoryidchanges":inventoryIdChanges
+    },
     data(){
         return {
             value:"",
@@ -20,8 +24,10 @@ export default {
             
         }
     },
-    mounted(){
-        this.fetchData()
+    async mounted(){
+     
+        
+        await this.fetchData()
       
         document.addEventListener("toggleEditMode",(e)=>{
            
@@ -31,7 +37,7 @@ export default {
 
     },
     template:`
-    <label class="form-label">Inventory Id</label>
+    <label class="form-label">Inventory Id&nbsp; <inventoryidchanges :objectid="objectid"></inventoryidchanges></label>
     <input id="inventoryId" name="inventoryId" type="text" class="form-control" :value="value" :disabled="!editingMode" ></input>
     `
 }

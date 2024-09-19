@@ -5,9 +5,10 @@ export default {
             operations:[]
         }
     },
+    props:["objectid"],
     methods:{
         async fetchData(){
-            let operationReq=await fetch("/api/inventory/operations",{
+            let operationReq=await fetch(`/api/inventory/object/${this.objectid}/operations`,{
                 method:"GET"
             })
             let operationRes=await operationReq.json()

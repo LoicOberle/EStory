@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+
+
 
 
     <link rel="stylesheet" href="{% static "inventory/css/detail.css" %}">
@@ -109,11 +113,11 @@
                     
                 </div>
                 <div class="tab-pane fade" id="operations" role="tabpanel" aria-labelledby="operations-tab">
-                    <operationlist></operationlist>
+                    <operationlist objectid="{{object.id}}"></operationlist>
                     <newoperation objectid="{{object.id}}"></newoperation>
                 </div>
                 <div class="tab-pane fade" id="loans" role="tabpanel" aria-labelledby="loans-tab">
-                    <loanlist></loanlist>
+                    <loanlist objectid="{{object.id}}"></loanlist>
                     <newloan objectid="{{object.id}}"></newloan>
                 </div>
             </div>
