@@ -62,6 +62,8 @@ export default {
            
            for (let i = 0; i < photos.length; i++) {
             const photo = photos[i];
+            
+            
             let photoToStore=await this.urlToFile(photo.image)
            
             
@@ -87,6 +89,7 @@ export default {
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     
@@ -95,8 +98,11 @@ export default {
                         file: file,          // Store the actual file object
                         base64: e.target.result  // Optionally store the base64 data for preview
                       });
-                      component.legends.push("")
-                      component.descriptions.push("")
+                    component.legends.push(file.name.split(".")[0])
+                    component.descriptions.push("")
+                    if(component.thumbnail==-1){
+                        component.thumbnail=0
+                    }
                     
                 }
                 reader.readAsDataURL(file);
