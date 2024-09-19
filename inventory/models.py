@@ -29,6 +29,11 @@ class ObjectPhoto(models.Model):
 
         # Call the superclass's delete method to delete the instance
         super().delete(*args, **kwargs)
+
+class ObjectFile(models.Model):
+    name=models.CharField(max_length=100,blank=True)
+    file=models.FileField(upload_to="files/")
+
     
 #Define a room of the museum
 class Room(models.Model):
@@ -40,6 +45,7 @@ class InventoryObject(models.Model):
     categories=models.ManyToManyField(ObjectCategory,blank=True)
     materials=models.ManyToManyField(ObjectMaterial,blank=True)
     photos=models.ManyToManyField(ObjectPhoto,blank=True)
+    files=models.ManyToManyField(ObjectFile,blank=True)
     createdBy = models.ForeignKey(User, on_delete=models.CASCADE)
     createdAt = models.DateTimeField(auto_now_add=True)
     name=models.CharField(max_length=255,blank=True)
@@ -53,9 +59,6 @@ class InventoryObject(models.Model):
     room=models.ForeignKey(Room,null=True,on_delete=models.SET_NULL,blank=True)
     def __str__(self):
         return self.inventoryId
-    #To do: add a line in changeHistory after each update if the field arent the same
-    
-
 
 
 
