@@ -7,7 +7,12 @@ from inventory import models
 from inventory import serializers
 
 def all_objects_view(request):
-    objects=models.InventoryObject.objects.all()
+    user_groups = request.user.groups.all()
+    if(len(user_groups)>0 and not request.user.is_superuser): #If a user has a group we only get the object of the same group, otherwise we get them all
+        objects = models.InventoryObject.objects.filter(createdBy__groups__in=user_groups).distinct()
+    else:
+        objects=models.InventoryObject.objects.all()
+     
     serializer=serializers.InventoryObjectSerializer(objects,many=True)
    
     ownership=[]
