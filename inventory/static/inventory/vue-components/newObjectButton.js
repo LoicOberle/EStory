@@ -11,7 +11,7 @@ export default {
             if (parts.length === 2) return parts.pop().split(';').shift();
         },
         async createObject(inventoryId,nexStep){
-            console.log("Create object");
+          
             let newObjectReq = await fetch("/api/inventory/objects/create",{
                 method:"POST",
                 body:JSON.stringify({

@@ -11,7 +11,7 @@ def purgeImages():
         model.delete()
 
     # Step 1: Get all image files from the media directory
-    media_directory = settings.MEDIA_ROOT
+    media_directory = os.path.join(settings.MEDIA_ROOT,"images")
     all_files_in_media = set(
         os.path.join(root, file)
         for root, dirs, files in os.walk(media_directory)
@@ -30,6 +30,35 @@ def purgeImages():
 
     for image_path in unused_images:
         os.remove(image_path)
+def purgeFiles():
+    #We loop the files without an object to delete them
+
+    related_ids = models.InventoryObject.objects.values('files')
+
+    unrelated_ids = models.ObjectFile.objects.exclude(id__in=related_ids)
+    for model in unrelated_ids:
+        model.delete()
+
+    # Step 1: Get all files from the media directory
+    media_directory = os.path.join(settings.MEDIA_ROOT,"files")
+    all_files_in_media = set(
+        os.path.join(root, file)
+        for root, dirs, files in os.walk(media_directory)
+        for file in files
+    )
+
+    # Step 2: Get all image files currently associated with FileField in MyModel
+    used_files = set(
+        os.path.join(settings.MEDIA_ROOT, instance.file.name)
+        for instance in models.ObjectFile.objects.all()
+        if instance.file  # if field is not empty
+    )
+
+    # Step 3: Identify and delete unused images
+    unused_files = all_files_in_media - used_files
+
+    for file_path in unused_files:
+        os.remove(file_path)
 
 def purgeCategories():
     related_ids = models.InventoryObject.objects.values('categories')

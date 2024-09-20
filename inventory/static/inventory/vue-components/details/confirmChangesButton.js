@@ -5,25 +5,27 @@ export default {
         return {
             value:"",
             editingMode:false,
-            photos:[]
+            photos:[],
+            files:[]
         }
     },
-    watch:{
-        editingMode(newValue,oldValue){
-           
-        }
-    },
+  
     methods:{
      async sendChanges(e){
         e.preventDefault()
         $("form").dirty("setAsClean");
         const formData = new FormData(document.querySelector("form"));
+  
            
             formData.delete("files")
         this.photos.forEach((img,index) => {
-            formData.append(`files-${index}`, img.file);
+            formData.append(`photos-${index}`, img.file);
+        });
+        this.files.forEach((file,index) => {
+            formData.append(`files-${index}`, file.file);
         });
        
+
         
         await fetch(`/member/inventory/object/${this.objectid}/infos/save`, {
             method: 'POST',
@@ -46,6 +48,11 @@ export default {
         document.addEventListener("collectPhotos",(e)=>{
           
             this.photos=e.detail.photos
+            
+        })
+        document.addEventListener("collectFiles",(e)=>{
+          
+            this.files=e.detail.files
             
         })
 

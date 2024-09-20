@@ -12,7 +12,7 @@ export default {
                 method:"GET"
             })
             let changesRes=await changesReq.json()
-            console.log(changesRes);
+          
             this.values=changesRes
             
         },

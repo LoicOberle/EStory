@@ -19,6 +19,7 @@ def infos_save(request,objectId):
 
     #Get fields from the form
     form=request.POST
+    postFiles=request.FILES
     if("inventoryId" in form):
         inventoryId=form["inventoryId"]
         #Comparing inventory ids
@@ -242,18 +243,22 @@ def infos_save(request,objectId):
             #Adding change to history table
             models.ChangeHistory.objects.create(inventoryObject=objectToModify,modifiedBy=request.user,modifiedAt=datetime.now(),fieldName="room",oldValue=str(oldvalue),newValue=str(room))
 
+    objectToModify.photos.clear()
     if("thumbnail" in form):
         thumbnail=form["thumbnail"]
         # We don't compare photos, we just clear them and
-    
+     
         if(thumbnail): # if we have a thumbnail, we have images                                                                                                                                                                 )
             #Clearing the images
-            files=request.FILES
-        
+           
             
-            objectToModify.photos.clear()
-            for index,(k, v) in enumerate(files.items()) :
-            
+
+            #Getting list of photos
+            photos=[]
+            for index,(k, v) in enumerate(postFiles.items()) :
+                if("photos" in k):
+                    photos.append((k,v))
+            for index,(k, v) in enumerate(photos) :
             
                 newPhoto=models.ObjectPhoto.objects.create(legend=form[f"photo-legend-{index}"],description=form[f"photo-description-{index}"])
             
@@ -268,12 +273,30 @@ def infos_save(request,objectId):
                 
                 objectToModify.photos.add(newPhoto)
 
-           
-              
-
              #Clean unused images
            
             utilities.purgeImages()
+
+    # We don't compare files, we just clear them and add new ones
+    objectToModify.files.clear()
+
+    #Getting list of files
+    files=[]
+    for index,(k, v) in enumerate(postFiles.items()) :
+        if("files" in k):
+            files.append((k,v))
+    for index,(k, v) in enumerate(files) :
+    
+        newFile=models.ObjectFile.objects.create(name=form[f"file-name-{index}"])
+    
+        newFile.file.save(v.name,v)
+        newFile.save()
+        
+        objectToModify.files.add(newFile)
+
+    #Clean unused images
+    
+    utilities.purgeFiles()
    
     objectToModify.save()
  

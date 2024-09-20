@@ -22,7 +22,7 @@ export default {
             
         },
         editLoan(loan){
-            console.log(loan);
+           
             
         },
         endText(endDate,ongoing){

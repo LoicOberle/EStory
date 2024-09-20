@@ -14,6 +14,7 @@ import descriptionField from "descriptionfield"
 import bibliographyField from "bibliographyfield"
 import roomField from "roomfield"
 import photoField from "photofield"
+import fileField from "filefield"
 import navbar from "navbar"
 import operationList from 'operationlist'
 import newoperation from "newoperation"
@@ -71,6 +72,7 @@ const app = createApp({
   app.component('bibliographyfield',bibliographyField)
   app.component('roomfield',roomField)
   app.component('photofield',photoField)
+  app.component('filefield',fileField)
   app.component('editswitch',editSwitch)
   app.component('confirmchangesbutton',confirmChangesButton)
 
@@ -85,7 +87,7 @@ const app = createApp({
   app.mount("#app")
 
   $(document).ready(()=>{
-    console.log("load");
+ 
     
     let form=$('form')
     form.dirty({

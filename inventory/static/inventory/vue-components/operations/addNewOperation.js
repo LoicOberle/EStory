@@ -10,7 +10,7 @@ export default {
             let id=this.objectid
             let datetime=$("#operation-datetime").val()
             let description=$("#operation-description").summernote('code');
-            console.log(id,datetime,description);
+         
             
             
         },

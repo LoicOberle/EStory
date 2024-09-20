@@ -154,12 +154,17 @@ export default {
             });
             document.dispatchEvent(collectPhotosEvent)
         },
-        deletePhoto(index){
+        deletePhoto(event,index){
+           event.preventDefault()
            
             
-            this.photos.splice(index,index)
-            this.descriptions.splice(index,index)
-            this.legends.splice(index,index)
+            this.photos.splice(index,1)
+            this.descriptions.splice(index,1)
+            this.legends.splice(index,1)
+            this.updatePhotoListButton()
+            $("form").dirty("setAsDirty")
+        
+           
         }
     },
     updated(){
@@ -209,7 +214,7 @@ export default {
             </div>
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-danger" @click="deletePhoto(index)">Delete</button>
+                    <button class="btn btn-danger" @click="(event) => deletePhoto(event,index)" :disabled="!editingMode">Delete</button>
                 </div>
                 
             </div>

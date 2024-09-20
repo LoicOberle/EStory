@@ -22,14 +22,20 @@ class ObjectPhotoSerializer(serializers.ModelSerializer):
         model = models.ObjectPhoto
         fields = ['id','legend','description','image','thumbnail']
 
+class ObjectFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ObjectFile
+        fields = ['id','name','file']
+
 class InventoryObjectSerializer(serializers.ModelSerializer):
     categories = ObjectCategorySerializer(many=True)
     materials = ObjectMaterialSerializer(many=True)
     photos = ObjectPhotoSerializer(many=True)
+    files = ObjectFileSerializer(many=True)
     createdBy=UserSerializer(many=False)
     class Meta:
         model = models.InventoryObject
-        fields = ['id',"inventoryId",'name', 'categories','materials','photos','description','createdBy','createdAt','origin','dating','provenance','reservelocation','author','bibliography','room']
+        fields = ['id',"inventoryId",'name', 'categories','materials','photos','files','description','createdBy','createdAt','origin','dating','provenance','reservelocation','author','bibliography','room']
 
 class OperationHistorySerializer(serializers.ModelSerializer):
     inventoryObject=InventoryObjectSerializer(many=False)
