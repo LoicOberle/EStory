@@ -329,18 +329,20 @@ def loans_save(request,objectId):
     loanDescription=form["description"]
     objectToModify=models.InventoryObject.objects.get(id=objectId)
 
+    newLoan=models.LoanHistory.objects.create(inventoryObject=objectToModify,description=loanDescription,ongoing=loanOngoing)
+    
     if(loanStartDate != ""):
         formattedLoanStartDate=datetime.strptime(loanStartDate, "%Y-%m-%d") #'2024-09-18 12:00'
+        newLoan.startDate=formattedLoanStartDate
     if(loanEndDate != ""):   
         formattedLoanEndDate=datetime.strptime(loanEndDate, "%Y-%m-%d") #'2024-09-18 12:00'
+        newLoan.endDate=formattedLoanEndDate
+    
+    newLoan.save()
     
   
-    if(loanOngoing):
-         models.LoanHistory.objects.create(inventoryObject=objectToModify,startDate=formattedLoanStartDate,description=loanDescription,ongoing=True)
-   
-    else:
-         models.LoanHistory.objects.create(inventoryObject=objectToModify,startDate=formattedLoanStartDate,endDate=formattedLoanEndDate,description=loanDescription,ongoing=False)
-    
+
+       
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 def loans_edit(request,objectId):
@@ -353,22 +355,20 @@ def loans_edit(request,objectId):
     else:
         loanOngoing=False
     loanDescription=form["description"]
-    objectToModify=models.InventoryObject.objects.get(id=objectId)
+
     loanToModify=models.LoanHistory.objects.get(id=form["loanId"])
 
     if(loanStartDate != ""):
         formattedLoanStartDate=datetime.strptime(loanStartDate, "%Y-%m-%d") #'2024-09-18 12:00'
+        loanToModify.startDate=formattedLoanStartDate
     if(loanEndDate != ""):
         formattedLoanEndDate=datetime.strptime(loanEndDate, "%Y-%m-%d") #'2024-09-18 12:00'
+        loanToModify.endDate=formattedLoanEndDate
     
-    print(formattedLoanStartDate,formattedLoanEndDate,loanOngoing,loanDescription)
 
-    loanToModify.startDate=formattedLoanStartDate
-    loanToModify.endDate=formattedLoanEndDate
     loanToModify.ongoing=loanOngoing
     loanToModify.description=loanDescription     
     
-    print(loanToModify)
     loanToModify.save()
  
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
