@@ -243,6 +243,10 @@ def infos_save(request,objectId):
             #Adding change to history table
             models.ChangeHistory.objects.create(inventoryObject=objectToModify,modifiedBy=request.user,modifiedAt=datetime.now(),fieldName="room",oldValue=str(oldvalue),newValue=str(room))
 
+
+    for photoToDelete in objectToModify.photos.all():
+        photoToDelete.delete()
+
     objectToModify.photos.clear()
     if("thumbnail" in form):
         thumbnail=form["thumbnail"]
@@ -278,6 +282,8 @@ def infos_save(request,objectId):
             utilities.purgeImages()
 
     # We don't compare files, we just clear them and add new ones
+    for fileToDelete in objectToModify.files.all():
+        fileToDelete.delete()
     objectToModify.files.clear()
 
     #Getting list of files
