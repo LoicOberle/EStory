@@ -124,7 +124,7 @@ export default {
             $("form").dirty("setAsDirty")
         },
         fileIcon(mimeType){
-            console.log(mimeType);
+         
             
             switch (mimeType) {
                 case "application/zip":
@@ -191,7 +191,7 @@ export default {
             <li v-for="(file , index) in files"  class="list-group-item">
                 <div class="row">
                     <div class="col-md-2">
-                       <a :href="file.base64" v-html="fileIcon(file.type)"></a>
+                       <a class="fileLink" :href="file.base64" v-html="fileIcon(file.type)"></a>
                     </div>
                       <div class="col-md-2 col-form-label col-form-label">
                         <label class="form-label" :for="'file-name-'+index">name</label>

@@ -1,3 +1,9 @@
 #photoList{
-    max-height: 15em !important;
+    max-height: 30em !important;
+}
+#fileList{
+    max-height: 30em !important;
+}
+.fileLink{
+    font-size: 2em;
 }
