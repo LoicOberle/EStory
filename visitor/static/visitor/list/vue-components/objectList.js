@@ -44,7 +44,7 @@ export default {
             let thumbnailSrc=""
             console.log(object.photos);
            object.photos.forEach(element => {
-                if(element.thumbnail){
+                if(element.thumbnail && element.viewable){
                     thumbnailAvailable=true
                     thumbnailSrc=element.image
                 } 
