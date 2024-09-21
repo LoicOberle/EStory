@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'estory',
     'member',
     'inventory',
-    'api'
+    'api',
+    'visitor'
 ]
 
 MIDDLEWARE = [
@@ -135,7 +136,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_REQUIRED_PATH_PREFIXES = [
     '/member/', 
-    '/api/',
+    
     
 ]
 
