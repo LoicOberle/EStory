@@ -36,7 +36,7 @@ export default {
             let categoriesRes=await categoriesReq.json()
             
             
-            let categories=categoriesRes.data
+            let categories=categoriesRes
             this.categories=categories
             
         }
