@@ -44,7 +44,7 @@ export default {
             let thumbnailSrc=""
             console.log(object.photos);
            object.photos.forEach(element => {
-                if(element.thumbnail){
+                if(element.thumbnail && element.viewable){
                     thumbnailAvailable=true
                     thumbnailSrc=element.image
                 } 
@@ -86,25 +86,3 @@ export default {
 
     `
 }
-
-{/* 
-     <div v-for="object in objects" class="object-item" data-category="transition">
-    <h3 class="name">{{object.name}}</h3>
-
-  </div>
-    <div id="objectList">
- <input type="text" class="fuzzy-search" />
-
- <!-- Filter Buttons -->
-<div class="filter-button-group">
-  <button data-filter="*">Show All</button>
-  <button data-filter=".test">Category 1</button>
-  <button data-filter=".tree">Category 2</button>
-</div>
-
-    <ul id="my-list" class="list">
-        <li v-for="object in objects" :class="getClasses(object)">
-            <p class="name">{{object.name}}</p>
-        </li>
-    </ul>
- </div> */}

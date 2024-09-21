@@ -1,0 +1,50 @@
+.container {  display: grid;
+    grid-template-columns: 3.2fr 0.5fr 0.8fr 0.1fr;
+    grid-template-rows: 0.7fr 1.2fr 1.2fr 1.2fr 0.5fr 0.5fr 0.5fr 0.5fr 1.2fr 0.5fr;
+    grid-auto-rows: 1fr;
+    gap: 1em 1em;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "title carousel carousel ."
+      ". carousel carousel ."
+      "description . categories ."
+      "description . material ."
+      "description . author ."
+      ". . origin ."
+      "bibliography . dating ."
+      "bibliography . provenance ."
+      "bibliography . files ."
+      ". . files .";
+  }
+  
+  .carousel { grid-area: carousel; }
+  
+  .title {
+    justify-self: center;
+    grid-area: title;
+  }
+  
+  .description {
+    justify-self: stretch;
+    grid-area: description;
+  }
+  
+  .material { grid-area: material; }
+  
+  .origin { grid-area: origin; }
+  
+  .provenance { grid-area: provenance; }
+  
+  .files { grid-area: files; }
+  
+  .bibliography {
+    justify-self: stretch;
+    grid-area: bibliography;
+  }
+  
+  .dating { grid-area: dating; }
+  
+  .categories { grid-area: categories; }
+  
+  .author { grid-area: author; }
+  

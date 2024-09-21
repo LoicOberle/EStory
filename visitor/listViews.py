@@ -10,6 +10,6 @@ def index_view(request):
 
 def object_detail_view(request,objectId):
     context={
-        
+        "objectId":objectId
     }
-    return TemplateResponse(request, 'visitor/list/pages/index.html', context=context)
+    return TemplateResponse(request, 'visitor/detail/pages/index.html', context=context)
