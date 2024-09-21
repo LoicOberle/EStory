@@ -40,6 +40,7 @@ class ObjectFile(models.Model):
 #Define a room of the museum
 class Room(models.Model):
     name=models.CharField(max_length=255,blank=True)
+    createdBy = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
 
 #Define an inventory object
 class InventoryObject(models.Model):
