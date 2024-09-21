@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include "visitor/detail/components/vue.html" %}
+    {% include "estory/components/bootstrap.html" %}
+    <link rel="stylesheet" href="{% static "visitor/detail/css/style.css" %}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+ 
+</head>
+<body>
+ 
+    <a href="/visitor/list"class="btn btn-primary ms-2 mt-2">Back</a>
+    <div id="app" data-objectid="{{objectId}}" class="mx-3 my-3">
+        <div id="content" v-if="object!=null" class="container">
+           
+                <div class="carousel"><carousel></carousel></div>
+                <div class="title"> <objecttitle></objecttitle></div>
+                <div class="description border rounded"><description></description></div>
+                <div class="author border rounded"><author></author></div>
+                <div class="material border rounded"><materials></materials></div>
+                <div class="categories border rounded"> <categories></categories></div>
+                <div class="origin border rounded"> <origin></origin></div>
+                <div class="dating border rounded"> <dating></dating></div>
+                <div class="provenance border rounded"> <provenance></provenance></div>
+                <div class="files border rounded"><files></files></div>
+                <div class="bibliography border rounded"> <bibliography></bibliography></div>
+             
+           
+           
+        </div>
+      
+    </div>
+    <script type="module" src="{% static "visitor/detail/js/detail.js" %}"></script>
+</body>
+</html>

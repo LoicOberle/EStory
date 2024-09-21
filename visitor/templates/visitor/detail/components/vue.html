@@ -1,0 +1,23 @@
+{% load static  %}
+<script src="https://cdn.jsdelivr.net/npm/mitt/dist/mitt.umd.js"></script>
+
+<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
+        "eventBus": "{% static 'estory/vue-components/eventBus.js' %}",
+        "title":"{% static 'visitor/detail/vue-components/title.js' %}",
+        "carousel":"{% static 'visitor/detail/vue-components/carousel.js' %}",
+        "description":"{% static 'visitor/detail/vue-components/description.js' %}",
+        "bibliography":"{% static 'visitor/detail/vue-components/bibliography.js' %}",
+        "materials":"{% static 'visitor/detail/vue-components/materials.js' %}",
+        "origin":"{% static 'visitor/detail/vue-components/origin.js' %}",
+        "dating":"{% static 'visitor/detail/vue-components/dating.js' %}",
+        "provenance":"{% static 'visitor/detail/vue-components/provenance.js' %}",
+        "author":"{% static 'visitor/detail/vue-components/author.js' %}",
+        "categories":"{% static 'visitor/detail/vue-components/categories.js' %}",
+        "files":"{% static 'visitor/detail/vue-components/files.js' %}"
+        
+      }
+    }
+  </script>
