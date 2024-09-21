@@ -59,6 +59,7 @@
                     <form action="/member/inventory/object/{{object.id}}/infos/save" method="POST" v-if="loaded" enctype="multipart/form-data" >
                         {% csrf_token %}
                         <inventoryidfield objectid="{{object.id}}" ></inventoryidfield>
+                        <viewablefield></viewablefield>
                         <div class="row">
                             <div class="col">
                                 <namefield objectid="{{object.id}}"></namefield>

@@ -20,6 +20,8 @@ import operationList from 'operationlist'
 import newoperation from "newoperation"
 import loanList from 'loanlist'
 import newloan from "newloan"
+import viewableField from 'viewablefield'
+
 const app = createApp({
     delimiters: ["[[", "]]"],
     data() {
@@ -71,6 +73,7 @@ const app = createApp({
   app.component('descriptionfield',descriptionField)
   app.component('bibliographyfield',bibliographyField)
   app.component('roomfield',roomField)
+  app.component('viewablefield',viewableField)
   app.component('photofield',photoField)
   app.component('filefield',fileField)
   app.component('editswitch',editSwitch)

@@ -50,6 +50,8 @@ export default {
 
             let objectRes=this.$root.objectData
             let files=objectRes.files
+            
+            
            
            for (let i = 0; i < files.length; i++) {
             const file = files[i];
@@ -61,7 +63,8 @@ export default {
             this.files.push({
                 file: fileToStore,          // Store the actual file object
                 base64: fileToStore.base64, // Optionally store the base64 data for preview
-                type:fileToStore.type
+                type:fileToStore.type,
+                viewable:file.viewable
               })
             this.names.push(file.name)
 
@@ -86,7 +89,8 @@ export default {
                     component.files.push({
                         file: file,          // Store the actual file object
                         base64: e.target.result,  // Optionally store the base64 data for preview
-                        type: file.type
+                        type: file.type,
+                        viewable:false
                       });
                     component.names.push(file.name.split(".")[0])
 
@@ -194,6 +198,10 @@ export default {
                        <a class="fileLink" :href="file.base64" v-html="fileIcon(file.type)"></a>
                     </div>
                       <div class="col-md-2 col-form-label col-form-label">
+                         <div class="form-check form-switch">
+                            <input :name="'file-viewable-'+index" class="form-check-input" type="checkbox" role="switch" :id="'file-viewable-'+index" :disabled="!editingMode"  :checked="file.viewable">
+                            <label class="form-check-label" :for="'file-viewable-'+index" >Viewable</label>
+                        </div>
                         <label class="form-label" :for="'file-name-'+index">name</label>
                     </div>
                     <div class="col-md-8">
