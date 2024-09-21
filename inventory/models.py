@@ -20,6 +20,7 @@ class ObjectPhoto(models.Model):
     description=models.TextField(blank=True)
     image = models.ImageField(upload_to='images/')
     thumbnail=models.BooleanField(default=False,null=True,blank=True)
+    viewable=models.BooleanField(null=True,blank=True,default=True)
     def __str__(self):
         return self.legend
     def delete(self, *args, **kwargs):
@@ -33,6 +34,7 @@ class ObjectPhoto(models.Model):
 class ObjectFile(models.Model):
     name=models.CharField(max_length=100,blank=True)
     file=models.FileField(upload_to="files/")
+    viewable=models.BooleanField(null=True,blank=True,default=False)
 
     
 #Define a room of the museum
@@ -57,6 +59,7 @@ class InventoryObject(models.Model):
     author=models.CharField(max_length=100,blank=True)
     bibliography=models.TextField(default="",blank=True)
     room=models.ForeignKey(Room,null=True,on_delete=models.SET_NULL,blank=True)
+    viewable=models.BooleanField(null=True,blank=True,default=False)
     def __str__(self):
         return self.inventoryId
 
