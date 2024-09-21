@@ -69,7 +69,8 @@ export default {
             
             this.photos.push({
                 file: photoToStore,          // Store the actual file object
-                base64: photoToStore.base64  // Optionally store the base64 data for preview
+                base64: photoToStore.base64,  // Optionally store the base64 data for preview
+                viewable:photo.viewable
               })
             this.legends.push(photo.legend)
             this.descriptions.push(photo.description)
@@ -96,7 +97,8 @@ export default {
                     
                     component.photos.push({
                         file: file,          // Store the actual file object
-                        base64: e.target.result  // Optionally store the base64 data for preview
+                        base64: e.target.result,  // Optionally store the base64 data for preview
+                        viewable:photo.true
                       });
                     component.legends.push(file.name.split(".")[0])
                     component.descriptions.push("")
@@ -202,7 +204,11 @@ export default {
                         <label class="form-label" :for="'photo-legend-'+index">Legend</label>
                     </div>
                     <div class="col-md-8">
-                        <input :id="'photo-thumbnail-'+index" class="photo-thumbnail form-check-input" :value="index" type="radio" name="thumbnail" :checked="index==thumbnail" :disabled="!editingMode"></input>   
+                        <input :id="'photo-thumbnail-'+index" class="photo-thumbnail form-check-input" :value="index" type="radio" name="thumbnail" :checked="index==thumbnail" :disabled="!editingMode"></input>  
+                        <div class="form-check form-switch">
+                            <input :name="'photo-viewable-'+index" class="form-check-input" type="checkbox" role="switch" :id="'photo-viewable-'+index" :disabled="!editingMode"  :checked="photo.viewable">
+                            <label class="form-check-label" :for="'photo-viewable-'+index" >Viewable</label>
+                        </div> 
                         <input class="photo-legend form-control" type="text" :name="'photo-legend-'+index" :id="'photo-legend-'+index" :value="legends[index]" :disabled="!editingMode"/>
             
                     </div>
