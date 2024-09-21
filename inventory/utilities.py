@@ -44,7 +44,7 @@ def purgeFiles():
     all_files_in_media = set(
         os.path.join(root, file)
         for root, dirs, files in os.walk(media_directory)
-        for file in files
+        for file in files  if not file.lower().endswith(('.gitignore'))
     )
 
     # Step 2: Get all image files currently associated with FileField in MyModel

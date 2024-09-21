@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.http import HttpResponse,JsonResponse
 from rest_framework.renderers import JSONRenderer
+from django.contrib.auth.models import Group
 import json
 from inventory import models
 from inventory import serializers
@@ -64,6 +65,14 @@ def all_rooms_view(request):
         "name":"Unlisted"
     })
     return JsonResponse(roomsList,safe=False)
+
+def all_groups_view(request):
+    groups=Group.objects.all().values()
+  
+
+    groupList=serializers.GroupSerializer(groups,many=True).data
+
+    return JsonResponse(groupList,safe=False)
 
 def all_operations_view(request,objectId):
     objectToSearch=models.InventoryObject.objects.get(id=objectId)
