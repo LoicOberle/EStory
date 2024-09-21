@@ -28,7 +28,7 @@ export default {
                 method:"GET"
             })
             let roomsRes=await roomsReq.json()
-            this.rooms=roomsRes.data
+            this.rooms=roomsRes
      
 
             $("#room").on("change",(e)=>{

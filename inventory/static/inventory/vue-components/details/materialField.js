@@ -36,7 +36,7 @@ export default {
             let materialsRes=await materialsReq.json()
             
             
-            let materials=materialsRes.data
+            let materials=materialsRes
             this.materials=materials
 
             
