@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor - EStory</title>
+    {% include "visitor/list/components/vue.html" %}
+    {% include "estory/components/bootstrap.html" %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  
+</head>
+<body>
+    <div id="app" class="my-3 mx-3">
+        <a href="/" class="h1">EStory</a>
+        <div class="row">
+            <div class="col-md-2">
+                <searchbar></searchbar>
+                <categoryfilter></categoryfilter>
+                <materialfilter></materialfilter>
+                <groupfilter></groupfilter>
+            </div>
+            <div class="col-md-10">
+                <objectlist></objectlist>
+            </div>
+          </div>
+     
+       
+       
+        
+        
+    </div>
+    <script type="module" src="{% static "visitor/list/js/list.js" %}"></script>
+</body>
+</html>

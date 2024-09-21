@@ -10,6 +10,7 @@ urlpatterns = [
     path("categories",inventoryViews.all_categories_view,name="All categories"),
     path("materials",inventoryViews.all_materials_view,name="All materials"),
     path("rooms",inventoryViews.all_rooms_view,name="All rooms"),
+    path("groups",inventoryViews.all_groups_view,name="All groups"),
     path("object/<objectId>/operations",inventoryViews.all_operations_view,name="All operations"),
     path("object/<objectId>/loans",inventoryViews.all_loans_view,name="All loans"),
     path("object/<objectId>/changes/<field>",inventoryViews.all_changes_view,name="All loans"),

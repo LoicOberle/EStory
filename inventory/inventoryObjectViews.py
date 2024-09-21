@@ -274,7 +274,7 @@ def infos_save(request,objectId):
                 if(f"photo-viewable-{index}" in form):
                     viewable=True
             
-                newPhoto=models.ObjectPhoto.objects.create(legend=form[f"photo-legend-{index}"],description=form[f"photo-description-{index}"])
+                newPhoto=models.ObjectPhoto.objects.create(legend=form[f"photo-legend-{index}"],description=form[f"photo-description-{index}"],viewable=viewable)
             
                 if(int(thumbnail)==int(index)):
                 
