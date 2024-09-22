@@ -16,7 +16,7 @@ export default {
             const objectRes=await objectReq.json()
           
             
-            this.objects=objectRes.results.filter((o)=>{return o.viewable})
+            this.objects=objectRes.results
             
 
         },

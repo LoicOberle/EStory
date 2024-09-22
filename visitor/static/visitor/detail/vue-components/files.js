@@ -31,7 +31,7 @@ export default {
         },
         async fetchData(){
             let object=this.$root.object
-            this.values=object.files.filter((e)=>{return e.viewable})
+            this.values=object.files
            for (let i = 0; i < this.values.length; i++) {
             const element = this.values[i];
             this.fileContent.push(await this.determineFileType(element))
