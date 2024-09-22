@@ -54,9 +54,7 @@ export default {
             this.photos=[]
             this.legends=[]
             this.descriptions=[]
-            let objectReq=await fetch("/api/inventory/object/"+this.objectid,{
-                method:"GET"
-            })
+
             let objectRes=this.$root.objectData
             let photos=objectRes.photos
            

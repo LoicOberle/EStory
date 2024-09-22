@@ -8,7 +8,7 @@ export default {
     },
     methods:{
         async fetchData(){
-            let changesReq=await fetch(`/api/inventory/object/${this.objectid}/changes/inventoryId`,{
+            let changesReq=await fetch(`/member/inventory/change/${this.objectid}/inventoryId/all`,{
                 method:"GET"
             })
             let changesRes=await changesReq.json()

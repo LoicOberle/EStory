@@ -8,7 +8,7 @@ export default {
     props:["objectid"],
     methods:{
         async fetchData(){
-            let operationReq=await fetch(`/api/inventory/object/${this.objectid}/operations`,{
+            let operationReq=await fetch(`/member/inventory/operation/${this.objectid}/all`,{
                 method:"GET"
             })
             let operationRes=await operationReq.json()

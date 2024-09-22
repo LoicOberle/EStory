@@ -404,16 +404,22 @@ def all_objects_view(request):
     user_groups = request.user.groups.all()
     if(len(user_groups)>0 and not request.user.is_superuser): #If a user has a group we only get the object of the same group, otherwise we get them all
         objects = models.InventoryObject.objects.filter(createdBy__groups__in=user_groups).distinct()
+        serializer=serializers.InventoryObjectSerializer(objects,many=True)
+        ownership=[]
+        for object in serializer.data:
+    
+            canDelete=(object["createdBy"]["id"]==request.user.id or request.user.is_superuser)
+            ownership.append(canDelete)
     else:
         objects=models.InventoryObject.objects.all()
+        serializer=serializers.InventoryObjectSerializer(objects,many=True)
+        ownership=[]
+        for object in serializer.data:
+            ownership.append(True)
      
-    serializer=serializers.InventoryObjectSerializer(objects,many=True)
+    
    
-    ownership=[]
-    for object in serializer.data:
- 
-        canDelete=(object["createdBy"]["id"]==request.user.id or request.user.is_superuser)
-        ownership.append(canDelete)
+    
     return JsonResponse({"data": serializer.data,"ownership":ownership},safe=False)
 
 def new_object_view(request):

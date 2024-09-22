@@ -12,7 +12,7 @@ export default {
         },
         async createObject(inventoryId,nexStep){
           
-            let newObjectReq = await fetch("/api/inventory/objects/create",{
+            let newObjectReq = await fetch("/member/inventory/object/create",{
                 method:"POST",
                 body:JSON.stringify({
                     "inventoryId":inventoryId

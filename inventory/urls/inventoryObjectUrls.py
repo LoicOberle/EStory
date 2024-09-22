@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path,include
 
-from views import inventoryObjectViews
+from ..views import inventoryObjectViews
 
 urlpatterns = [
     #Related to pages and forms
