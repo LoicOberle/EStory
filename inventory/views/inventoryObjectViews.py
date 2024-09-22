@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect,JsonResponse,HttpResponse
-from . import models
-from . import utilities
+from .. import models
+from .. import utilities
+from .. import serializers
 from datetime import datetime
 import json
 import io
@@ -393,3 +394,47 @@ def loans_edit(request,objectId):
     loanToModify.save()
  
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+###########################################################################3
+
+
+
+def all_objects_view(request):
+    user_groups = request.user.groups.all()
+    if(len(user_groups)>0 and not request.user.is_superuser): #If a user has a group we only get the object of the same group, otherwise we get them all
+        objects = models.InventoryObject.objects.filter(createdBy__groups__in=user_groups).distinct()
+    else:
+        objects=models.InventoryObject.objects.all()
+     
+    serializer=serializers.InventoryObjectSerializer(objects,many=True)
+   
+    ownership=[]
+    for object in serializer.data:
+ 
+        canDelete=(object["createdBy"]["id"]==request.user.id or request.user.is_superuser)
+        ownership.append(canDelete)
+    return JsonResponse({"data": serializer.data,"ownership":ownership},safe=False)
+
+def new_object_view(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    inventoryId = body['inventoryId']
+    
+    newObject=models.InventoryObject.objects.create(inventoryId=inventoryId,createdBy=request.user)
+    serializer=serializers.InventoryObjectSerializer(newObject)
+    return JsonResponse(serializer.data,safe=False)
+
+def object_view(request,objectId):
+    object=models.InventoryObject.objects.prefetch_related('categories').prefetch_related('materials').prefetch_related('photos').get(id=objectId)
+   
+    serializer=serializers.InventoryObjectSerializer(object)
+  
+                                                                                                     
+    return JsonResponse(serializer.data,safe=False)    
+
+def object_delete(request,objectId):
+    object=models.InventoryObject.objects.get(id=objectId)
+    object.delete()
+                                                                                              
+    return JsonResponse({},safe=False)       
