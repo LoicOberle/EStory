@@ -1,0 +1,8 @@
+Django
+psycopg2>=2.8
+pillow
+python-dotenv
+djangorestframework
+django-rest-swagger
+setuptools
+drf-spectacular
