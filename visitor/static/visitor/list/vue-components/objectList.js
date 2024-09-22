@@ -7,21 +7,16 @@ export default {
     },
     methods:{
         async fetchData(){
-            const objectReq=await fetch("/member/inventory/object/all",{
+            const objectReq=await fetch("/api/objects",{
                 method:"GET",
-                credentials: 'omit',
-                
-                headers:{
-                    'X-Skip-Auth': 'true',
-                    'Referer': window.location.origin,
-                }
+                credentials: 'omit'
             })
             
             
             const objectRes=await objectReq.json()
           
             
-            this.objects=objectRes.data.filter((o)=>{return o.viewable})
+            this.objects=objectRes.results.filter((o)=>{return o.viewable})
             
 
         },
@@ -48,7 +43,7 @@ export default {
             
             let thumbnailAvailable=false
             let thumbnailSrc=""
-            console.log(object.photos);
+           
            object.photos.forEach(element => {
                 if(element.thumbnail && element.viewable){
                     thumbnailAvailable=true

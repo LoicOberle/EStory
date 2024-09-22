@@ -96,7 +96,7 @@ export default {
                     component.photos.push({
                         file: file,          // Store the actual file object
                         base64: e.target.result,  // Optionally store the base64 data for preview
-                        viewable:photo.true
+                        viewable:true
                       });
                     component.legends.push(file.name.split(".")[0])
                     component.descriptions.push("")

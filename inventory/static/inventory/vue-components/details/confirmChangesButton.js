@@ -27,11 +27,18 @@ export default {
        
 
         
-        await fetch(`/member/inventory/object/${this.objectid}/infos/save`, {
+        let postReq=await fetch(`/member/inventory/object/${this.objectid}/infos/save`, {
             method: 'POST',
             body: formData,
         })
-        window.location.reload()
+        var notyf = new Notyf();
+        if(postReq.status==200){
+            notyf.success('Your changes have been successfully saved!');
+        }else{
+            console.error(postReq);
+            
+            notyf.error('An error occured !');
+        }
 
      
         },

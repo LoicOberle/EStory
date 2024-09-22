@@ -15,13 +15,11 @@ export default {
     methods:{
         async fetchData(){
             let objectRes=this.$root.objectData
-            console.log(objectRes);
+          
             
             let viewable=objectRes.viewable
             this.value=viewable
-            console.log(viewable);
-            
-            
+          
             
         }
     },

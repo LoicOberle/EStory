@@ -78,7 +78,7 @@ const app = createApp({
             return combinations.join(', ');
         },
         initIsotope(){
-            console.log("init");
+            
             
       // quick search regex
       var qsRegex;
@@ -94,7 +94,7 @@ const app = createApp({
 
         },
         refreshIsotope(){
-            console.log("refresh");
+          
             
             this.isotope.isotope('reloadItems') // Reload new DOM elements
             this.isotope.isotope();

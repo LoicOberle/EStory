@@ -3,7 +3,7 @@ from .. import serializers
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
-@login_required
+
 def all_changes_view(request,objectId,field):
     objectToSearch=models.InventoryObject.objects.get(id=objectId)
     changes=models.ChangeHistory.objects.order_by('modifiedAt').filter(inventoryObject=objectToSearch,fieldName=field).all()
