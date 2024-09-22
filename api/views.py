@@ -1,5 +1,5 @@
 from django.contrib.auth.models import Group, User
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets,authentication
 from inventory import models
 from inventory import serializers
 
@@ -9,6 +9,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = serializers.UserSerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -18,6 +19,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all().order_by('name')
     serializer_class = serializers.GroupSerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class InventoryObjectViewSet(viewsets.ModelViewSet):
@@ -26,6 +28,7 @@ class InventoryObjectViewSet(viewsets.ModelViewSet):
     """
     queryset = models.InventoryObject.objects.all()
     serializer_class = serializers.InventoryObjectSerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class ObjectCategoryViewSet(viewsets.ModelViewSet):
@@ -34,6 +37,7 @@ class ObjectCategoryViewSet(viewsets.ModelViewSet):
     """
     queryset = models.ObjectCategory.objects.all()
     serializer_class = serializers.ObjectCategorySerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class ObjectMaterialViewSet(viewsets.ModelViewSet):
@@ -42,6 +46,7 @@ class ObjectMaterialViewSet(viewsets.ModelViewSet):
     """
     queryset = models.ObjectMaterial.objects.all()
     serializer_class = serializers.ObjectMaterialSerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class OperationViewSet(viewsets.ModelViewSet):
@@ -50,6 +55,7 @@ class OperationViewSet(viewsets.ModelViewSet):
     """
     queryset = models.OperationHistory.objects.all()
     serializer_class = serializers.OperationHistorySerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class LoanViewSet(viewsets.ModelViewSet):
@@ -58,6 +64,7 @@ class LoanViewSet(viewsets.ModelViewSet):
     """
     queryset = models.LoanHistory.objects.all()
     serializer_class = serializers.LoanHistorySerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class RoomViewSet(viewsets.ModelViewSet):
@@ -66,6 +73,7 @@ class RoomViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Room.objects.all()
     serializer_class = serializers.RoomSerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class ObjectPhotoViewSet(viewsets.ModelViewSet):
@@ -74,6 +82,7 @@ class ObjectPhotoViewSet(viewsets.ModelViewSet):
     """
     queryset = models.ObjectPhoto.objects.all()
     serializer_class = serializers.ObjectPhotoSerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class ObjectFileViewSet(viewsets.ModelViewSet):
@@ -82,6 +91,7 @@ class ObjectFileViewSet(viewsets.ModelViewSet):
     """
     queryset = models.ObjectFile.objects.all()
     serializer_class = serializers.ObjectFileSerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class ChangeViewSet(viewsets.ModelViewSet):
@@ -90,4 +100,5 @@ class ChangeViewSet(viewsets.ModelViewSet):
     """
     queryset = models.ChangeHistory.objects.all()
     serializer_class = serializers.ChangeHistorySerializer
+    authentication_classes = [authentication.BasicAuthentication,authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
