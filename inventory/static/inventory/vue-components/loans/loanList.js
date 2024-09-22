@@ -12,7 +12,7 @@ export default {
     },
     methods:{
         async fetchData(){
-            let loanReq=await fetch(`/api/inventory/object/${this.objectid}/loans`,{
+            let loanReq=await fetch(`/member/inventory/loan/${this.objectid}/all`,{
                 method:"GET"
             })
             let loanRes=await loanReq.json()

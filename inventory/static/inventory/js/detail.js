@@ -34,7 +34,7 @@ const app = createApp({
     methods:{
         async fetchData(){
             
-            let objectReq=await fetch("/api/inventory/object/"+this.objectid,{
+            let objectReq=await fetch("/member/inventory/object/"+this.objectid,{
                 method:"GET"
             })
             let objectRes=await objectReq.json()

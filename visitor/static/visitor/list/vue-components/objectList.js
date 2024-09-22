@@ -7,15 +7,21 @@ export default {
     },
     methods:{
         async fetchData(){
-            const objectReq=await fetch("/api/inventory/objects",{
+            const objectReq=await fetch("/member/inventory/object/all",{
                 method:"GET",
-                credentials: 'omit'
+                credentials: 'omit',
+                
+                headers:{
+                    'X-Skip-Auth': 'true',
+                    'Referer': window.location.origin,
+                }
             })
             
             
             const objectRes=await objectReq.json()
           
-            this.objects=objectRes.data
+            
+            this.objects=objectRes.data.filter((o)=>{return o.viewable})
             
 
         },

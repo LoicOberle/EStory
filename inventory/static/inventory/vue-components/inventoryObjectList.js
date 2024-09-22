@@ -8,9 +8,11 @@ export default {
     methods:{
         async retrieveData(){
          
-            let objectReq=await fetch("/api/inventory/objects",{
+            let objectReq=await fetch("/member/inventory/object/all",{
                 method:"GET"
             })
+           
+            
             let objectRes=await objectReq.json()
         
             this.objects=objectRes.data
@@ -30,7 +32,7 @@ export default {
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Yes, delete it!"
               }).then(async (result) => {
-                await fetch(`/api/inventory/object/${index}/delete`,{
+                await fetch(`/member/inventory/object/${index}/delete`,{
                     method:"DELETE",
                     headers:{
                         'X-CSRFToken': this.getCookie("csrftoken") // Include the CSRF token in the header

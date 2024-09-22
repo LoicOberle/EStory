@@ -19,16 +19,22 @@ export default {
         async fetchData(){
             let objectRes=this.$root.objectData
             let room=objectRes.room
-         
+            
+
             
             this.value=room==null?-1:room
             this.originalValue=room==null?-1:room
 
-            let roomsReq=await fetch("/api/inventory/rooms",{
+            let roomsReq=await fetch("/member/inventory/room/all",{
                 method:"GET"
             })
             let roomsRes=await roomsReq.json()
+            roomsRes.push({
+                "id":-1,
+                "name":"Unlisted"
+            })
             this.rooms=roomsRes
+            
      
 
             $("#room").on("change",(e)=>{

@@ -28,7 +28,7 @@ export default {
             
             this.values=objectMaterials
 
-            let materialsReq=await fetch("/api/inventory/materials",{
+            let materialsReq=await fetch("/member/inventory/material/all",{
                 method:"GET"
             })
         

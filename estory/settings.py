@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'member',
     'inventory',
     'api',
-    'visitor'
+    'visitor',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -135,10 +136,15 @@ LOGIN_URL = '/auth/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_REQUIRED_PATH_PREFIXES = [
-    '/member/', 
+    '/api/', 
     
     
 ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}

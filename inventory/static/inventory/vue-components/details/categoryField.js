@@ -28,7 +28,7 @@ export default {
             
             this.values=objectCategories
 
-            let categoriesReq=await fetch("/api/inventory/categories",{
+            let categoriesReq=await fetch("/member/inventory/category/all",{
                 method:"GET"
             })
         

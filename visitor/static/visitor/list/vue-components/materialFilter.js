@@ -6,8 +6,14 @@ export default {
     },
     methods:{
         async  fetchData(){
-            let materialReq=await fetch("/api/inventory/materials",{
-                method:"GET"
+            let materialReq=await fetch("/member/inventory/material/all",{
+                method:"GET",
+                credentials: 'omit',
+                
+                headers:{
+                    'X-Skip-Auth': 'true',
+                    'Referer': window.location.origin,
+                }
             })
             let materialRes=await materialReq.json()
             console.log(materialRes);
