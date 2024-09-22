@@ -6,27 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Object edition - Estory</title>
     {% include "estory/components/vue.html" %}
+    {% include "estory/components/jquery.html" %}
     {% include "estory/components/bootstrap.html" %}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src=" https://cdn.jsdelivr.net/npm/jquery.dirty@0.8.4/dist/jquery.dirty.min.js "></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.8.1/tagify.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.8.1/tagify.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.css" />
-  
-    <script src="https://cdn.datatables.net/2.1.6/js/dataTables.js"></script>
-    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
-
-
+    {% include "estory/components/datatable.html" %}
+    {% include "estory/components/sweetalert.html" %}
+    {% include "estory/components/tagify.html" %}
+    {% include "estory/components/summernotes.html" %}
+    {% include "estory/components/flatpickr.html" %}
+    {% include "estory/components/tippy.html" %}
+    
 
 
     <link rel="stylesheet" href="{% static "inventory/css/detail.css" %}">

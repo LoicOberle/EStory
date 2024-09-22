@@ -7,9 +7,9 @@
     <title>Visitor - EStory</title>
     {% include "visitor/list/components/vue.html" %}
     {% include "estory/components/bootstrap.html" %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+    {% include "estory/components/jquery.html" %}
+
+    <script src="{% static "estory/libraries/isotope.js" %}"></script>
   
 </head>
 <body>

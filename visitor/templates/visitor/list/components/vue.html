@@ -1,11 +1,9 @@
 {% load static  %}
-<script src="https://cdn.jsdelivr.net/npm/mitt/dist/mitt.umd.js"></script>
 
 <script type="importmap">
     {
       "imports": {
-        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
-        "eventBus": "{% static 'estory/vue-components/eventBus.js' %}",
+        "vue": "{% static 'estory/libraries/vuejs.js' %}",
         "objectlist":"{% static 'visitor/list/vue-components/objectList.js' %}",
         "categoryfilter":"{% static 'visitor/list/vue-components/categoryFilter.js' %}",
         "materialfilter":"{% static 'visitor/list/vue-components/materialFilter.js' %}",
