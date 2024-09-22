@@ -102,14 +102,14 @@ const app = createApp({
     },
     mounted() {
         // Initialize Isotope after the component is mounted
-        this.$nextTick(() => {
-          this.initIsotope();
-        });
         let component=this
-        $(document).load(()=>{
+        this.$nextTick(() => {
+            this.initIsotope();
             component.isotope.isotope('reloadItems')
             component.isotope.isotope();
-        })
+          });
+        
+    
       },
       updated() {
         // Re-initialize or refresh Isotope whenever the component is updated

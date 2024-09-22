@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv() 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +29,7 @@ SECRET_KEY = 'django-insecure-mnw7!6zge#s)mn+hez%&^j@d@bnpngt3^59w-4hj2*gjjfd2a5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
 
 # Application definition
@@ -139,9 +143,7 @@ LOGIN_URL = '/auth/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_REQUIRED_PATH_PREFIXES = [
-    '/api/', 
-    
-    
+ 
 ]
 
 MEDIA_URL = '/media/'

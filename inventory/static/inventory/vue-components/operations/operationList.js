@@ -23,7 +23,7 @@ export default {
           
             
             let res=``
-            let display=moment(jsDate).fromNow();
+           
             res=jsDate.toLocaleString("fr-FR")
             return res
         },
