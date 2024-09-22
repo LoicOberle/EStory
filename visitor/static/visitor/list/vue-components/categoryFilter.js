@@ -6,8 +6,14 @@ export default {
     },
     methods:{
         async  fetchData(){
-            let categoryReq=await fetch("/api/inventory/categories",{
-                method:"GET"
+            let categoryReq=await fetch("/member/inventory/category/all",{
+                method:"GET",
+                credentials: 'omit',
+                
+                headers:{
+                    'X-Skip-Auth': 'true',
+                    'Referer': window.location.origin,
+                }
             })
             let categoryRes=await categoryReq.json()
             console.log(categoryRes);

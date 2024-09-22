@@ -6,8 +6,14 @@ export default {
     },
     methods:{
         async  fetchData(){
-            let groupReq=await fetch("/api/inventory/groups",{
-                method:"GET"
+            let groupReq=await fetch("/member/inventory/group/all",{
+                method:"GET",
+                credentials: 'omit',
+                
+                headers:{
+                    'X-Skip-Auth': 'true',
+                    'Referer': window.location.origin,
+                }
             })
             let groupRes=await groupReq.json()
             console.log(groupRes);

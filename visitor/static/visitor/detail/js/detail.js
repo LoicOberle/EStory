@@ -26,8 +26,14 @@ const app = createApp({
         async fetchData(){
            
             
-            let objectReq=await fetch("/api/inventory/object/"+this.objectid,{
-                method:"GET"
+            let objectReq=await fetch("/member/inventory/object/"+this.objectid,{
+                method:"GET",
+                credentials: 'omit',
+                
+                headers:{
+                    'X-Skip-Auth': 'true',
+                    'Referer': window.location.origin,
+                }
             })
            
             

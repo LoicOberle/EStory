@@ -7,6 +7,10 @@ from .. import serializers
 from datetime import datetime
 import json
 import io
+from django.contrib.auth.decorators import login_required
+from urllib.parse import urlparse
+
+@login_required
 def detail_view(request,objectId):
 
     context={
@@ -14,6 +18,7 @@ def detail_view(request,objectId):
     }
     return TemplateResponse(request, 'inventory/pages/objectDetail.html', context=context)
 
+@login_required
 def infos_save(request,objectId):
     #Get object to compare fields
     objectToModify=models.InventoryObject.objects.prefetch_related('categories').prefetch_related('materials').get(id=objectId)
@@ -326,6 +331,7 @@ def infos_save(request,objectId):
 
     return HttpResponseRedirect(f"/member/inventory/object/{objectId}/detail/")
 
+@login_required
 def operations_save(request,objectId):
     form=request.POST
     operationDatetime=form["datetime"]
@@ -338,6 +344,7 @@ def operations_save(request,objectId):
     models.OperationHistory.objects.create(inventoryObject=objectToModify,date=formattedOperationDatetime,description=operationDescription,author=request.user)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
+@login_required
 def loans_save(request,objectId):
     form=request.POST
     print(form)
@@ -367,6 +374,7 @@ def loans_save(request,objectId):
        
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
+@login_required
 def loans_edit(request,objectId):
     form=request.POST
     print(form)
@@ -398,9 +406,41 @@ def loans_edit(request,objectId):
 
 ###########################################################################3
 
+def is_same_domain(request):
+    """Helper function to check if request is from the same domain."""
+    referer = request.headers.get('Referer')
+    origin = request.headers.get('Origin')
+
+    # If Referer or Origin is not present, consider it external (not same domain)
+    if not referer and not origin:
+        return False
+
+    # Parse the host from referer or origin
+    referer_host = urlparse(referer).netloc if referer else None
+    origin_host = urlparse(origin).netloc if origin else None
+
+    # Check if the request host matches the referer or origin host
+    request_host = request.get_host()
+    return referer_host == request_host or origin_host == request_host
 
 
 def all_objects_view(request):
+
+     # Check if the request should bypass authentication
+    if is_same_domain(request) and (request.headers.get('X-Skip-Auth') == 'true' or request.GET.get('skip_auth') == 'true'):
+
+        objects=models.InventoryObject.objects.all()
+        serializer=serializers.InventoryObjectSerializer(objects,many=True)
+        ownership=[]
+        for object in serializer.data:
+            ownership.append(True)
+        
+        return JsonResponse({"data": serializer.data,"ownership":ownership},safe=False)
+
+    # All other requests require authentication
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "Unauthorized"}, status=401)
+    
     user_groups = request.user.groups.all()
     if(len(user_groups)>0 and not request.user.is_superuser): #If a user has a group we only get the object of the same group, otherwise we get them all
         objects = models.InventoryObject.objects.filter(createdBy__groups__in=user_groups).distinct()
@@ -416,12 +456,11 @@ def all_objects_view(request):
         ownership=[]
         for object in serializer.data:
             ownership.append(True)
-     
-    
-   
     
     return JsonResponse({"data": serializer.data,"ownership":ownership},safe=False)
 
+    
+@login_required
 def new_object_view(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
@@ -431,14 +470,23 @@ def new_object_view(request):
     serializer=serializers.InventoryObjectSerializer(newObject)
     return JsonResponse(serializer.data,safe=False)
 
+
 def object_view(request,objectId):
+    # Check if the request should bypass authentication
+    if is_same_domain(request) and (request.headers.get('X-Skip-Auth') == 'true' or request.GET.get('skip_auth') == 'true'):
+        object=models.InventoryObject.objects.prefetch_related('categories').prefetch_related('materials').prefetch_related('photos').get(id=objectId)
+        serializer=serializers.InventoryObjectSerializer(object)                                                                                            
+        return JsonResponse(serializer.data,safe=False)    
+    # All other requests require authentication
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "Unauthorized"}, status=401)
+
+    # Normal authenticated response
     object=models.InventoryObject.objects.prefetch_related('categories').prefetch_related('materials').prefetch_related('photos').get(id=objectId)
-   
-    serializer=serializers.InventoryObjectSerializer(object)
-  
-                                                                                                     
+    serializer=serializers.InventoryObjectSerializer(object)                                                                                            
     return JsonResponse(serializer.data,safe=False)    
 
+@login_required
 def object_delete(request,objectId):
     object=models.InventoryObject.objects.get(id=objectId)
     object.delete()
