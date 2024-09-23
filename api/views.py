@@ -105,7 +105,7 @@ class InventoryObjectViewSet(viewsets.ModelViewSet):
         get_all_boolean=request.query_params.get('get_all', None)=="true"
       
 
-        if(get_all_boolean):
+        if(get_all_boolean  and request.user.is_authenticated):
             # Get the object based on the primary key from the URL
             instance = self.get_object()
             instance=models.InventoryObject.objects.prefetch_related("photos").prefetch_related("files").get(id=instance.id)
