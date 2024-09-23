@@ -11,8 +11,12 @@
 
 </head>
 <body>
-  
+    
+    <div id="visitorlist">
+        <a href="/visitor/list" class="btn btn-primary rounded-pill">Object List</a>
+    </div>
     <div id="app">
+        
         <museumname name="{{ name }}" ></museumname>
         <usermenu :isuserconnected = '{{isUserConnected|lower}}'></usermenu>
 

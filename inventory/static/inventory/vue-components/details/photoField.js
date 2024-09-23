@@ -198,8 +198,7 @@ export default {
                        <img :src="photo.base64" style="width:100px"></img>
                     </div>
                       <div class="col-md-2 col-form-label col-form-label">
-                        <label class="form-check-label" :for="'photo-thumbnail-'+index">Thumbnail</label>
-                        <label class="form-label" :for="'photo-legend-'+index">Legend</label>
+                     
                     </div>
                     <div class="col-md-8">
                         <input :id="'photo-thumbnail-'+index" class="photo-thumbnail form-check-input" :value="index" type="radio" name="thumbnail" :checked="index==thumbnail" :disabled="!editingMode"></input>  

@@ -30,3 +30,10 @@
     font-size: larger;
 
 }
+
+#visitorlist{
+    position: absolute;
+    left: 5em;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
