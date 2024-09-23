@@ -76,7 +76,7 @@ class InventoryObjectViewSet(viewsets.ModelViewSet):
   
         newQueryset=[]
         for object in custom_queryset:
-            if(get_all_boolean):
+            if(get_all_boolean and request.user.is_authenticated):
                newQueryset.append(models.InventoryObject.objects.prefetch_related("photos").prefetch_related("files").get(id=object.id))
             else:
                 newQueryset.append(models.InventoryObject.objects.prefetch_related(Prefetch("photos", queryset=models.ObjectPhoto.objects.filter(viewable=True))).prefetch_related(Prefetch("files", queryset=models.ObjectFile.objects.filter(viewable=True))).get(id=object.id))
