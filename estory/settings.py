@@ -168,7 +168,7 @@ SPECTACULAR_SETTINGS = {
 CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
-    'localhost'
+    'https://localhost'
 ]
 
 CSRF_COOKIE_SECURE=True
