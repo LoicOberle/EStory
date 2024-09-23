@@ -1,5 +1,4 @@
 Django
-psycopg2>=2.8
 pillow
 python-dotenv
 djangorestframework
